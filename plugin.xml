@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="kscd-background-video-upload"
+        version="1.0.0">
+
+    <name>KSCD Background Video Upload</name>
+    <description>Envoi de fichiers (vidéos) en arrière-plan avec WorkManager : file persistante, relance automatique, notification de progression.</description>
+    <license>Proprietary</license>
+
+    <engines>
+        <engine name="cordova-android" version=">=12.0.0" />
+    </engines>
+
+    <js-module src="www/kscd-upload.js" name="KscdUpload">
+        <clobbers target="KscdUpload" />
+    </js-module>
+
+    <platform name="android">
+        <preference name="WORK_VERSION" default="2.10.0" />
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="KscdUpload">
+                <param name="android-package" value="com.kafein.kscd.upload.KscdUploadPlugin" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+        </config-file>
+
+        <!-- Android 14+ : le service de premier plan de WorkManager doit déclarer son type -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service
+                android:name="androidx.work.impl.foreground.SystemForegroundService"
+                android:foregroundServiceType="dataSync"
+                android:exported="false" />
+        </config-file>
+
+        <framework src="androidx.work:work-runtime:$WORK_VERSION" />
+
+        <source-file src="src/android/KscdUploadPlugin.java" target-dir="src/com/kafein/kscd/upload" />
+        <source-file src="src/android/UploadWorker.java" target-dir="src/com/kafein/kscd/upload" />
+        <source-file src="src/android/FileQueue.java" target-dir="src/com/kafein/kscd/upload" />
+    </platform>
+</plugin>

@@ -1,0 +1,12 @@
+{
+  "name": "kscd-background-video-upload",
+  "version": "1.0.0",
+  "description": "Envoi de vidéos en arrière-plan (WorkManager) avec relance automatique et notification de progression",
+  "cordova": {
+    "id": "kscd-background-video-upload",
+    "platforms": ["android"]
+  },
+  "keywords": ["ecosystem:cordova", "cordova-android"],
+  "license": "UNLICENSED",
+  "private": true
+}
