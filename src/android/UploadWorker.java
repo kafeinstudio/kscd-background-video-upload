@@ -432,7 +432,7 @@ public class UploadWorker extends Worker {
     private static void notifyFinished(Context ctx, String id, JSONObject rec, boolean ok, String error) {
         NotificationCompat.Builder b = new NotificationCompat.Builder(ctx, CHANNEL_ID)
                 .setSmallIcon(ok ? android.R.drawable.stat_sys_upload_done : android.R.drawable.stat_notify_error)
-                .setContentTitle(ok ? "Vidéo envoyée" : "Échec de l'envoi de la vidéo")
+                .setContentTitle(ok ? "1 vidéo(s) envoyée(s)" : "Échec de l'envoi de la vidéo")
                 .setContentText(ok ? rec.optString("fileName") : error)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -457,7 +457,7 @@ public class UploadWorker extends Worker {
         NotificationCompat.Builder b = new NotificationCompat.Builder(ctx, CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.stat_sys_upload_done)
                 .setContentTitle(title.isEmpty() ? "Envois terminés" : title)
-                .setContentText(count + (count > 1 ? " vidéos envoyées" : " vidéo envoyée"))
+                .setContentText(count + " vidéo(s) envoyée(s)")
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setContentIntent(launchIntent(ctx));
