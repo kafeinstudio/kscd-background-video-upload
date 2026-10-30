@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="kscd-background-video-upload"
-        version="1.0.0">
+        version="1.0.1">
 
     <name>KSCD Background Video Upload</name>
     <description>Envoi de fichiers (vidéos) en arrière-plan avec WorkManager : file persistante, relance automatique, notification de progression.</description>
